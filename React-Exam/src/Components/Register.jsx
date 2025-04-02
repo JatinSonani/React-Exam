@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserAsync } from "../Servise/action/auth.action";
+import { registerUserAsync } from "../Service/action/authAction";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./Login.css"; // Using the same movie theme CSS
 

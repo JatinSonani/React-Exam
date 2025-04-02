@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Container, Spinner, Card, Row, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { getAllMoviesAsync } from "../Service/action/movie.action";
+import { getAllMoviesAsync } from "../Service/action/movieAction";
 import { FaEye, FaStar, FaList } from "react-icons/fa";
-import { addToWatchlist } from "../Service/action/watchlist.action";
+import { addToWatchlist } from "../Service/action/watchlistActions";
 
 const Home = () => {
   const navigate = useNavigate();

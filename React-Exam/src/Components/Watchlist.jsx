@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Table, Alert, Spinner, ButtonGroup } from "react-bootstrap";
-import { removeFromWatchlist, increasePriority, decreasePriority, clearWatchlist } from "../Service/action/watchlist.action";
+import { Button, Container, Table, Spinner, ButtonGroup } from "react-bootstrap";
+// import { removeFromWatchlist, increasePriority, decreasePriority, clearWatchlist } from "../Service/action/cartAction";
+import { removeFromWatchlist, increasePriority, decreasePriority, clearWatchlist } from "../Service/action/watchlistActions";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

@@ -1,0 +1,66 @@
+/* Centering the form and adding spacing */
+.add-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Card styling */
+.card {
+    width: 50rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.add-data {
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Form Group Styling */
+.form-group-field {
+    margin-bottom: 1rem;
+}
+
+/* Input Fields */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Error Messages */
+.text-danger {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Add Button */
+.add-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.add-button:hover {
+    background: #218838;
+}
+
+/* Image Preview */
+img {
+    display: block;
+    max-height: 250px;
+    margin: 10px auto;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}

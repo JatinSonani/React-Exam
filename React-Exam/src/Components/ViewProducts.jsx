@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductAsync } from "../Servise/action/product.action";
+// import { getProductAsync } from "../Service/action/movieAction";
 import { Button } from "react-bootstrap";
-import { addToCart } from "../Servise/action/cart.action";
+import { addToCart } from "../Service/action/cartAction";
 import { FaShoppingCart } from "react-icons/fa";
-import "./MovieTheme.css"; // Adding movie theme styles
 
 const ViewProduct = () => {
   const { id } = useParams();

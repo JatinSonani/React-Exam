@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUserAsync, loginWithGoogle } from "../Servise/action/auth.action";
+import { loginUserAsync, loginWithGoogle } from "../Service/action/authAction";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { FaGoogle } from "react-icons/fa";
 import "./Login.css"; // Import a CSS file for the movie theme

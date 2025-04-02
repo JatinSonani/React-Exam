@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AddMovieAsync } from "../Service/action/movie.action";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import uploadImage from "../Service/imageUpload";
+import { AddMovieAsync } from "../Service/action/movieAction";
+import { Button, Col, Container, Form, Row, Card, Image } from "react-bootstrap";
+import "../assets/AddMovie.css";
 
 const AddMovie = () => {
     const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const AddMovie = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const [previewImage, setPreviewImage] = useState(null);
 
     const validate = () => {
         let errors = {};
@@ -70,20 +71,25 @@ const AddMovie = () => {
     const handleImage = async (e) => {
         let file = e.target.files[0];
         if (!file) return;
-        let url = await uploadImage(file);
-        setInputData({
-            ...inputData,
-            poster_image: `${url}`
-        });
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewImage(reader.result);
+            setInputData({
+                ...inputData,
+                poster_image: reader.result
+            });
+        };
+        reader.readAsDataURL(file);
     };
 
     return (
-        <Container className="mt-3 add-container">
-            <h2 className="mb-4 add-data">Add Movie</h2>
-            <Form onSubmit={handleSubmit} className="form-group-field">
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">Movie Title</Form.Label>
-                    <Col sm="7">
+        <Container className="mt-4 d-flex justify-content-center">
+            <Card className="p-4 shadow-lg" style={{ width: "50rem" }}>
+                <h2 className="mb-4 text-center text-primary">🎬 Add a New Movie</h2>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Movie Title</Form.Label>
                         <Form.Control
                             type="text"
                             name="title"
@@ -92,12 +98,10 @@ const AddMovie = () => {
                             placeholder="Enter Movie Title"
                         />
                         {errors.title && <small className="text-danger">{errors.title}</small>}
-                    </Col>
-                </Form.Group>
+                    </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">Genre</Form.Label>
-                    <Col sm="7">
+                    <Form.Group className="mb-3">
+                        <Form.Label>Genre</Form.Label>
                         <Form.Control
                             type="text"
                             name="genre"
@@ -106,46 +110,45 @@ const AddMovie = () => {
                             placeholder="Enter Genre"
                         />
                         {errors.genre && <small className="text-danger">{errors.genre}</small>}
-                    </Col>
-                </Form.Group>
+                    </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">Description</Form.Label>
-                    <Col sm="7">
+                    <Form.Group className="mb-3">
+                        <Form.Label>Description</Form.Label>
                         <Form.Control
+                            as="textarea"
+                            rows={3}
                             name="description"
                             value={inputData.description}
                             onChange={handleChanged}
-                            type="text"
                             placeholder="Enter Movie Description"
                         />
                         {errors.description && <small className="text-danger">{errors.description}</small>}
-                    </Col>
-                </Form.Group>
-                
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">Release Year</Form.Label>
-                    <Col sm="7">
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-3">
+                        <Form.Label>Release Year</Form.Label>
                         <Form.Control
                             type="text"
                             name="release_year"
                             value={inputData.release_year}
                             onChange={handleChanged}
-                            placeholder="Enter Release Year"
+                            placeholder="Enter Release Year (e.g., 2023)"
                         />
                         {errors.release_year && <small className="text-danger">{errors.release_year}</small>}
-                    </Col>
-                </Form.Group>
+                    </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">Movie Poster</Form.Label>
-                    <Col sm="4">
+                    <Form.Group className="mb-3">
+                        <Form.Label>Movie Poster</Form.Label>
                         <Form.Control type="file" name="poster_image" onChange={handleImage} />
-                    </Col>
-                </Form.Group>
+                        {errors.poster_image && <small className="text-danger">{errors.poster_image}</small>}
+                        {previewImage && (
+                            <Image src={previewImage} alt="Movie Poster" className="mt-3" fluid rounded style={{ maxHeight: "250px" }} />
+                        )}
+                    </Form.Group>
 
-                <Button className="add-button" variant="success" type="submit">Add Movie</Button>
-            </Form>
+                    <Button className="w-100" variant="success" type="submit">Add Movie</Button>
+                </Form>
+            </Card>
         </Container>
     );
 };

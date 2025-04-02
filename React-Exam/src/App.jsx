@@ -1,22 +1,22 @@
-
 import { useEffect, useState } from "react";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+
 import Home from "./Components/Home";
 import Header from "./Components/Header";
-import AddProduct from "./Components/AddProduct";
-import EditProduct from "./Components/EditProduct";
-import { Route, Routes } from "react-router";
-import Footer from "./Components/Footer";
-import ViewProduct from "./Components/ViewProducts";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
-import Cart from "./Components/Cart";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { loginSuc } from "./Servise/action/auth.action";
-import Categories from "./Components/Categories";
+import AddMovie from "./Components/AddMovie";
+import EditMovie from "./Components/EditMovie";
+import MovieFooter from "./Components/MovieFooter";
+import ViewProducts from "./Components/ViewProducts";
+import Movie from "./Components/Movie";
+import Watchlist from "./Components/Watchlist";
+import MovieGenres from "./Components/MovieGenres";
+
 import { auth } from "./FirebaseConfig";
-import { fetchCartFromFirebase } from "./Servise/action/cart.action";
+import { loginSuc } from "./Service/action/authAction";
+import { fetchCartFromFirebase } from "./Service/action/cartAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,13 +27,13 @@ function App() {
       if (user) {
         dispatch(
           loginSuc({
-            displayname: user.displayName,
+            displayName: user.displayName,
             email: user.email,
             id: user.uid,
           })
         );
-        dispatch(fetchCartFromFirebase(user.uid)); 
-      }else{
+        dispatch(fetchCartFromFirebase(user.uid));
+      } else {
         dispatch({ type: "FETCH_CART", payload: [] });
       }
       setLoading(false);
@@ -53,17 +53,17 @@ function App() {
   return (
     <>
       <Header />
-      <Categories />
+      <MovieGenres />
       <Routes>
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Movie type="register" />} />
+        <Route path="/signin" element={<Movie type="login" />} />
         <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/add" element={<AddProduct />} />
-        <Route path="/edit/:id" element={<EditProduct />} />
-        <Route path="/view/:id" element={<ViewProduct />} />
+        <Route path="/cart" element={<Watchlist />} />
+        <Route path="/add" element={<AddMovie />} />
+        <Route path="/edit/:id" element={<EditMovie />} />
+        <Route path="/view/:id" element={<ViewProducts />} />
       </Routes>
-      <Footer />
+      <MovieFooter />
     </>
   );
 }

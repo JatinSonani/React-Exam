@@ -3,7 +3,7 @@ import { Navbar, Button, Card, Row, Col, Container } from "react-bootstrap";
 import { FaSearch, FaBookmark, FaFilm } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logOutAsync } from "../Servise/action/auth.action";
+import { logOutAsync } from "../Service/action/authAction";;
 
 const Header = () => {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const movies = useSelector(state => state.movieReducer.movies);
-    const { user } = useSelector(state => state.userReducer);
+    const { user } = useSelector(state => state.authReducer);
     const { watchlist } = useSelector(state => state.watchlistReducer);
     const watchlistCount = watchlist.length;
 

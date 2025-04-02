@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { getMovieAsync, updateMovieAsync } from "../Service/action/movie.action";
+import { getMovieAsync, updateMovieAsync } from "../Service/action/movieAction";
 
 const EditMovie = () => {
     const { id } = useParams();
